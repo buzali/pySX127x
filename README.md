@@ -65,7 +65,7 @@ Todo:
 First import the modules 
 ```python
 from SX127x.LoRa import *
-from SX127x.board_config import BOARD
+from SX127x.board_config_CHIP import BOARD
 ```
 then set up the board GPIOs
 ```python
