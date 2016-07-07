@@ -35,8 +35,8 @@ class BOARD:
     DIO1 = "XIO-P1"   # CHIP GPIO XIO-P1
     DIO2 = "XIO-P2"   # CHIP GPIO XIO-P2
     DIO3 = "XIO-P3"   # CHIP GPIO XIO-P3
-    LED  = "XIO-P0"   # CHIP GPIO 18 connects to the LED on the proto shield
-    SWITCH = 4  # CHIP GPIO 4 connects to a switch
+    LED  = "XIO-P4"   # CHIP GPIO 18 connects to the LED on the proto shield
+    SWITCH = "XIO-P5"  # CHIP GPIO 4 connects to a switch
 
     # The spi object is kept here
     spi = None
