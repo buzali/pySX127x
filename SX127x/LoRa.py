@@ -22,7 +22,7 @@
 
 import sys
 from .constants import *
-from .board_config import BOARD
+from .board_config_CHIP import BOARD
 
 
 ################################################## Some utility functions ##############################################
@@ -83,7 +83,7 @@ class LoRa(object):
 
     def __init__(self, verbose=True, do_calibration=True, calibration_freq=868):
         """ Init the object
-        
+
         Send the device to sleep, read all registers, and do the calibration (if do_calibration=True)
         :param verbose: Set the verbosity True/False
         :param calibration_freq: call rx_chain_calibration with this parameter. Default is 868
@@ -500,7 +500,7 @@ class LoRa(object):
                 coding_rate = val >> 1 & 0x07,
                 implicit_header_mode = val & 0x01
             )
-        
+
     def set_modem_config_1(self, bw=None, coding_rate=None, implicit_header_mode=None):
         loc = locals()
         current = self.get_modem_config_1()
@@ -524,7 +524,7 @@ class LoRa(object):
 
     def set_implicit_header_mode(self, implicit_header_mode):
         self.set_modem_config_1(implicit_header_mode=implicit_header_mode)
-        
+
     def get_modem_config_2(self, include_symb_timout_lsb=False):
         val = self.spi.xfer([REG.LORA.MODEM_CONFIG_2, 0])[1]
         d = dict(
@@ -535,7 +535,7 @@ class LoRa(object):
         if include_symb_timout_lsb:
             d['symb_timout_lsb'] = val & 0x03
         return d
-        
+
     def set_modem_config_2(self, spreading_factor=None, tx_cont_mode=None, rx_crc=None):
         loc = locals()
         # RegModemConfig2 contains the SymbTimout MSB bits. We tack the back on when writing this register.
@@ -571,7 +571,7 @@ class LoRa(object):
         :return: New value of register
         """
         return 0x27 | (invert & 0x01) << 6
-        
+
     @getter(REG.LORA.INVERT_IQ)
     def get_invert_iq(self, val):
         """ Get the invert the I and Q setting
@@ -615,7 +615,7 @@ class LoRa(object):
         lsb = preamble - msb * 256
         old_msb, old_lsb = self.spi.xfer([REG.LORA.PREAMBLE_MSB | 0x80, msb, lsb])[1:]
         return old_lsb + 256 * old_msb
-        
+
     @getter(REG.LORA.PAYLOAD_LENGTH)
     def get_payload_length(self, val):
         return val
